@@ -46,6 +46,11 @@ func TestIsBalanced(t *testing.T) {
 			input:    "a(b[c{d}e]f)g))){{]]",
 			expected: false,
 		},
+		{
+			name:     "String without parenthesis",
+			input:    "abcdef",
+			expected: true,
+		},
 	}
 
 	for _, testCase := range testCases {
