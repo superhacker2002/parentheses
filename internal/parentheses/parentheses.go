@@ -1,5 +1,10 @@
 package parentheses
 
+import (
+	"math/rand"
+	"time"
+)
+
 func IsBalanced(str string) bool {
 	stack := make([]rune, 0)
 	pares := map[rune]rune{
@@ -19,4 +24,14 @@ func IsBalanced(str string) bool {
 		}
 	}
 	return len(stack) == 0
+}
+
+func Generate(length int) string {
+	parentheses := "({[]})"
+	result := make([]rune, length)
+	rand.Seed(time.Now().UnixNano())
+	for i := 0; i < length; i++ {
+		result[i] = rune(parentheses[rand.Intn(len(parentheses))])
+	}
+	return string(result)
 }
