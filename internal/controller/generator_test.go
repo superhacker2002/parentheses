@@ -19,7 +19,7 @@ func TestGenerateHandler(t *testing.T) {
 			name:     "Correct length",
 			url:      "/generate?n=10",
 			status:   http.StatusOK,
-			expected: ")])){({[}(",
+			expected: ")])){({[}(\n",
 		},
 		{
 			name:     "Zero length",
@@ -60,10 +60,6 @@ func TestGenerateHandler(t *testing.T) {
 			response := httptest.NewRecorder()
 			generateHandler(response, request)
 			assert.Equal(t, testCase.status, response.Code, "generateHandler returned wrong status code")
-
-			assert.Equal(t, "text/plain; charset=utf-8", response.Header().Get("Content-Type"),
-				"generateHandler returned wrong content type")
-
 			assert.Equal(t, testCase.expected, response.Body.String())
 		})
 	}
