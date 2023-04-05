@@ -1,7 +1,6 @@
 package parentheses
 
 import (
-	"fmt"
 	"math/rand"
 )
 
@@ -28,7 +27,6 @@ func IsBalanced(str string) bool {
 
 // GenerateRandom function requires random seed to be generated before call
 func GenerateRandom(length uint) string {
-	fmt.Println(length)
 	const parentheses = "({[]})"
 	result := make([]rune, length)
 	for i := uint(0); i < length; i++ {
