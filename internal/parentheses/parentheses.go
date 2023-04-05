@@ -26,8 +26,8 @@ func IsBalanced(str string) bool {
 	return len(stack) == 0
 }
 
-// GenerateRandomSequence function requires random seed to be generated before call
-func GenerateRandomSequence(length uint) string {
+// GenerateRandom function requires random seed to be generated before call
+func GenerateRandom(length uint) string {
 	fmt.Println(length)
 	const parentheses = "({[]})"
 	result := make([]rune, length)
