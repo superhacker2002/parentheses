@@ -1,8 +1,8 @@
 package parentheses
 
 import (
+	"fmt"
 	"math/rand"
-	"time"
 )
 
 func IsBalanced(str string) bool {
@@ -26,11 +26,12 @@ func IsBalanced(str string) bool {
 	return len(stack) == 0
 }
 
-func Generate(length int) string {
-	parentheses := "({[]})"
+// GenerateRandomSequence function requires random seed to be generated before call
+func GenerateRandomSequence(length uint) string {
+	fmt.Println(length)
+	const parentheses = "({[]})"
 	result := make([]rune, length)
-	rand.Seed(time.Now().UnixNano())
-	for i := 0; i < length; i++ {
+	for i := uint(0); i < length; i++ {
 		result[i] = rune(parentheses[rand.Intn(len(parentheses))])
 	}
 	return string(result)
