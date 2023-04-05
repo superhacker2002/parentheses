@@ -4,6 +4,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"math/rand"
 	"testing"
+	"time"
 )
 
 func TestIsBalanced(t *testing.T) {
@@ -63,28 +64,15 @@ func TestIsBalanced(t *testing.T) {
 }
 
 func TestGenerateRandomSequence(t *testing.T) {
-	testCases := []struct {
-		name     string
-		input    uint
-		expected string
-	}{
-		{
-			name:     "Correct length",
-			input:    10,
-			expected: ")])){({[}(",
-		},
-		{
-			name:     "Zero length",
-			input:    0,
-			expected: "",
-		},
-	}
-	rand.Seed(1)
+	seed := time.Now().UnixNano()
+	t.Logf("random seed is %d", seed)
+	rand.Seed(seed)
 
-	for _, testCase := range testCases {
-		t.Run(testCase.name, func(t *testing.T) {
-			assert.Equal(t, testCase.expected, GenerateRandomSequence(testCase.input),
-				"GenerateRandomSequence(%d) ", testCase.input)
-		})
+	length := uint(rand.Intn(100))
+	result := GenerateRandom(length)
+	assert.Equal(t, length, uint(len(result)))
+	const parentheses = "({[]})"
+	for _, c := range result {
+		assert.Contains(t, parentheses, string(c))
 	}
 }

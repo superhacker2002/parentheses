@@ -22,5 +22,5 @@ func generateHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "length must be greater than 0", http.StatusBadRequest)
 		return
 	}
-	fmt.Fprintf(w, parentheses.GenerateRandomSequence(uint(length)))
+	fmt.Fprintln(w, parentheses.GenerateRandom(uint(length)))
 }
