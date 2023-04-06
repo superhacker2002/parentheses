@@ -1,5 +1,9 @@
 package parentheses
 
+import (
+	"math/rand"
+)
+
 func IsBalanced(str string) bool {
 	stack := make([]rune, 0)
 	pares := map[rune]rune{
@@ -19,4 +23,14 @@ func IsBalanced(str string) bool {
 		}
 	}
 	return len(stack) == 0
+}
+
+// GenerateRandom function requires random seed to be generated before call
+func GenerateRandom(length uint) string {
+	const parentheses = "({[]})"
+	result := make([]rune, length)
+	for i := uint(0); i < length; i++ {
+		result[i] = rune(parentheses[rand.Intn(len(parentheses))])
+	}
+	return string(result)
 }

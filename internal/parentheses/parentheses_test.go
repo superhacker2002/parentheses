@@ -2,7 +2,9 @@ package parentheses
 
 import (
 	"github.com/stretchr/testify/assert"
+	"math/rand"
 	"testing"
+	"time"
 )
 
 func TestIsBalanced(t *testing.T) {
@@ -56,7 +58,21 @@ func TestIsBalanced(t *testing.T) {
 	for _, testCase := range testCases {
 		t.Run(testCase.name, func(t *testing.T) {
 			isBalanced := IsBalanced(testCase.input)
-			assert.Equal(t, isBalanced, testCase.expected, "IsBalanced(%q) ", testCase.input)
+			assert.Equal(t, testCase.expected, isBalanced, "IsBalanced(%q) ", testCase.input)
 		})
+	}
+}
+
+func TestGenerateRandomSequence(t *testing.T) {
+	seed := time.Now().UnixNano()
+	t.Logf("random seed is %d", seed)
+	rand.Seed(seed)
+
+	length := uint(rand.Intn(100))
+	result := GenerateRandom(length)
+	assert.Equal(t, length, uint(len(result)))
+	const parentheses = "({[]})"
+	for _, c := range result {
+		assert.Contains(t, parentheses, string(c))
 	}
 }
