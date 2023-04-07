@@ -10,8 +10,8 @@ import (
 )
 
 func main() {
-	generator := generator.New(parentheses.New())
-	generator.SetRoutes()
+	handler := generator.New(parentheses.New())
+	handler.SetRoutes()
 	rand.Seed(time.Now().UnixNano())
 	log.Fatal(http.ListenAndServe("localhost:8080", nil))
 }

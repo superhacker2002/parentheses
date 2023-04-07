@@ -6,15 +6,15 @@ import (
 	"strconv"
 )
 
-type parentheses interface {
+type parenthesesGenerator interface {
 	GenerateRandom(uint) string
 }
 
 type handler struct {
-	parentheses parentheses
+	parentheses parenthesesGenerator
 }
 
-func New(gen parentheses) handler {
+func New(gen parenthesesGenerator) handler {
 	return handler{parentheses: gen}
 }
 

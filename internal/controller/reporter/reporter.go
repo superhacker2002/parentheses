@@ -8,16 +8,16 @@ type client interface {
 	Generate(length uint) (string, error)
 }
 
-type parentheses interface {
+type parenthesesChecker interface {
 	IsBalanced(str string) bool
 }
 
 type reporter struct {
-	parentheses parentheses
+	parentheses parenthesesChecker
 	client      client
 }
 
-func New(p parentheses, client client) reporter {
+func New(p parenthesesChecker, client client) reporter {
 	return reporter{parentheses: p, client: client}
 }
 
