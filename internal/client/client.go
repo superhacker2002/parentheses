@@ -7,15 +7,15 @@ import (
 	"strings"
 )
 
-type Client struct {
+type client struct {
 	URI string
 }
 
-func New(serverURI string) Client {
-	return Client{URI: serverURI}
+func New(serverURI string) client {
+	return client{URI: serverURI}
 }
 
-func (c Client) Generate(length uint) (string, error) {
+func (c client) Generate(length uint) (string, error) {
 	resp, err := http.Get(fmt.Sprintf("%s/generate?n=%d", c.URI, length))
 	if err != nil {
 		return "", err
