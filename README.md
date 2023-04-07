@@ -2,7 +2,7 @@
 Project that contains web service for generating string with random parentheses of the given length and client for reporting percentage of balanced and unbalanced generated strings.
 
 ## Usage
-**1.** Download repository from GitHub
+**1.** Download repository from GitHub   
 **2.** Run web service:
 ```go
 go run cmd/generator/generator.go
