@@ -1,4 +1,4 @@
-package generator
+package httphandler
 
 import (
 	"fmt"
@@ -10,19 +10,19 @@ type parenthesesGenerator interface {
 	GenerateRandom(uint) string
 }
 
-type handler struct {
+type httpHandler struct {
 	parentheses parenthesesGenerator
 }
 
-func New(gen parenthesesGenerator) handler {
-	return handler{parentheses: gen}
+func New(gen parenthesesGenerator) httpHandler {
+	return httpHandler{parentheses: gen}
 }
 
-func (g handler) SetRoutes() {
+func (g httpHandler) SetRoutes() {
 	http.HandleFunc("/generate", g.generateHandler)
 }
 
-func (g handler) generateHandler(w http.ResponseWriter, r *http.Request) {
+func (g httpHandler) generateHandler(w http.ResponseWriter, r *http.Request) {
 	lengthParameter := r.URL.Query().Get("n")
 	length, err := strconv.Atoi(lengthParameter)
 	if err != nil {

@@ -1,4 +1,4 @@
-package generator
+package httphandler
 
 import (
 	"github.com/stretchr/testify/assert"
