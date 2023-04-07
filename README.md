@@ -2,23 +2,20 @@
 Project that contains web service for generating string with random parentheses of the given length and client for reporting percentage of balanced and unbalanced generated strings.
 
 ## Usage
-**1.** Get module from GitHub:
-```go
-go get "github.com/superhacker2002/parentheses"
-```
+**1.** Download repository from GitHub
 **2.** Run web service:
-```
+```go
 go run cmd/generator/generator.go
 ```
 **3.** Run client and get a report:
-```
+```go
 go run cmd/reporter/reporter.go
 ```
 
 ## Description
 #### 1 - Algorithm
 
-The function of package `parentheses` verifies if the given string is a balanceds sequence of brackets, i.e. each of the open brackets must be closed by the same type of bracket in the right order:
+The function of package `parentheses` verifies if the given string is a balanced sequence of brackets, i.e. each of the open brackets must be closed by the same type of bracket in the right order:
 ```
 [(]) - unbalanced
 
