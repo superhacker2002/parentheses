@@ -6,16 +6,16 @@ import (
 	"strconv"
 )
 
-type parenthesesGenerator interface {
+type generator interface {
 	GenerateRandom(uint) string
 }
 
 type httpHandler struct {
-	parentheses parenthesesGenerator
+	parentheses generator
 }
 
-func New(gen parenthesesGenerator) httpHandler {
-	return httpHandler{parentheses: gen}
+func New(generator generator) httpHandler {
+	return httpHandler{parentheses: generator}
 }
 
 func (g httpHandler) SetRoutes() {
