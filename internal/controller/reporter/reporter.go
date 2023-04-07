@@ -30,8 +30,7 @@ func (r reporter) Do() error {
 			return r.report(length)
 		})
 	}
-	err := g.Wait()
-	return err
+	return g.Wait()
 }
 
 func (r reporter) report(length uint) error {
