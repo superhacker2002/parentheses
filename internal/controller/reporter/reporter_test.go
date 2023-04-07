@@ -39,9 +39,7 @@ func TestDo(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			c := Reporter{
-				Client: mockClient{res: tc.res, err: tc.err},
-			}
+			c := New(mockClient{res: tc.res, err: tc.err})
 			err := c.Do()
 			assert.Equal(t, tc.expectedErr, err)
 		})

@@ -10,7 +10,11 @@ type client interface {
 }
 
 type Reporter struct {
-	Client client
+	client client
+}
+
+func New(client client) Reporter {
+	return Reporter{client: client}
 }
 
 func (r Reporter) Do() error {
@@ -26,7 +30,7 @@ func (r Reporter) Do() error {
 func (r Reporter) report(length uint) error {
 	var balancedNum int
 	for i := 0; i < 1000; i++ {
-		resp, err := r.Client.Generate(length)
+		resp, err := r.client.Generate(length)
 		if err != nil {
 			return err
 		}
