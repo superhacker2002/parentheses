@@ -4,13 +4,13 @@ import (
 	"math/rand"
 )
 
-type Parentheses struct{}
+type parentheses struct{}
 
-func New() Parentheses {
-	return Parentheses{}
+func New() parentheses {
+	return parentheses{}
 }
 
-func (p Parentheses) IsBalanced(str string) bool {
+func (p parentheses) IsBalanced(str string) bool {
 	stack := make([]rune, 0)
 	pares := map[rune]rune{
 		')': '(',
@@ -32,11 +32,11 @@ func (p Parentheses) IsBalanced(str string) bool {
 }
 
 // GenerateRandom function requires random seed to be generated before call
-func (p Parentheses) GenerateRandom(length uint) string {
-	const Parentheses = "({[]})"
+func (p parentheses) GenerateRandom(length uint) string {
+	const parentheses = "({[]})"
 	result := make([]rune, length)
 	for i := uint(0); i < length; i++ {
-		result[i] = rune(Parentheses[rand.Intn(len(Parentheses))])
+		result[i] = rune(parentheses[rand.Intn(len(parentheses))])
 	}
 	return string(result)
 }
