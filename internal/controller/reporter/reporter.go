@@ -2,6 +2,7 @@ package reporter
 
 import (
 	"fmt"
+	"golang.org/x/sync/errgroup"
 )
 
 type client interface {
@@ -23,12 +24,13 @@ func New(p parenthesesChecker, client client) reporter {
 
 func (r reporter) Do() error {
 	lengths := [3]uint{2, 4, 8}
+	g := new(errgroup.Group)
 	for _, length := range lengths {
-		if err := r.report(length); err != nil {
-			return err
-		}
+		g.Go(func() error {
+			return r.report(length)
+		})
 	}
-	return nil
+	return g.Wait()
 }
 
 func (r reporter) report(length uint) error {
