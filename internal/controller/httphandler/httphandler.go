@@ -18,11 +18,11 @@ func New(generator generator) httpHandler {
 	return httpHandler{parentheses: generator}
 }
 
-func (g httpHandler) SetRoutes() {
-	http.HandleFunc("/generate", g.generateHandler)
+func (h httpHandler) SetRoutes() {
+	http.HandleFunc("/generate", h.generateHandler)
 }
 
-func (g httpHandler) generateHandler(w http.ResponseWriter, r *http.Request) {
+func (h httpHandler) generateHandler(w http.ResponseWriter, r *http.Request) {
 	lengthParameter := r.URL.Query().Get("n")
 	length, err := strconv.Atoi(lengthParameter)
 	if err != nil {
@@ -33,5 +33,5 @@ func (g httpHandler) generateHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "length must be greater than 0", http.StatusBadRequest)
 		return
 	}
-	fmt.Fprintln(w, g.parentheses.GenerateRandom(uint(length)))
+	fmt.Fprintln(w, h.parentheses.GenerateRandom(uint(length)))
 }
