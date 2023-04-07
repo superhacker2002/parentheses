@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strings"
 )
 
 type Client struct {
@@ -24,5 +25,7 @@ func (c Client) Generate(length uint) (string, error) {
 	if err != nil {
 		return "", err
 	}
+	strBody := string(body)
+	strings.TrimRight(strBody, "\n")
 	return string(body), err
 }
