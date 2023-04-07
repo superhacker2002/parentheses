@@ -6,23 +6,23 @@ import (
 	"strconv"
 )
 
-type parenthesesGenerator interface {
+type parentheses interface {
 	GenerateRandom(uint) string
 }
 
-type generator struct {
-	parentheses parenthesesGenerator
+type handler struct {
+	parentheses parentheses
 }
 
-func New(gen parenthesesGenerator) generator {
-	return generator{parentheses: gen}
+func New(gen parentheses) handler {
+	return handler{parentheses: gen}
 }
 
-func (g generator) SetRoutes() {
+func (g handler) SetRoutes() {
 	http.HandleFunc("/generate", g.generateHandler)
 }
 
-func (g generator) generateHandler(w http.ResponseWriter, r *http.Request) {
+func (g handler) generateHandler(w http.ResponseWriter, r *http.Request) {
 	lengthParameter := r.URL.Query().Get("n")
 	length, err := strconv.Atoi(lengthParameter)
 	if err != nil {
