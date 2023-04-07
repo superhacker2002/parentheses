@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/superhacker2002/parentheses/internal/client"
-	reporter "github.com/superhacker2002/parentheses/internal/controller/reporter"
+	"github.com/superhacker2002/parentheses/internal/controller/reporter"
 	"log"
 )
 

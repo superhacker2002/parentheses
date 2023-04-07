@@ -1,4 +1,4 @@
-package controller
+package reporter
 
 import (
 	"errors"
