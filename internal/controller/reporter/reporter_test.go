@@ -8,31 +8,31 @@ import (
 )
 
 type mockClient struct {
-	generateFunc func(length uint) (string, error)
+	res string
+	err error
 }
 
 func (m mockClient) Generate(length uint) (string, error) {
-	return m.generateFunc(length)
+	return m.res, m.err
 }
 
 func TestDo(t *testing.T) {
 	testCases := []struct {
-		name         string
-		generateFunc func(length uint) (string, error)
-		expectedErr  error
+		name        string
+		res         string
+		err         error
+		expectedErr error
 	}{
 		{
-			name: "Successful report",
-			generateFunc: func(length uint) (string, error) {
-				return "()()()", nil
-			},
+			name:        "Successful report",
+			res:         "()()()",
+			err:         nil,
 			expectedErr: nil,
 		},
 		{
-			name: "Error generating string",
-			generateFunc: func(length uint) (string, error) {
-				return "", errors.New("error generating string")
-			},
+			name:        "Error generating string",
+			res:         "",
+			err:         errors.New("error generating string"),
 			expectedErr: errors.New("error generating string"),
 		},
 	}
@@ -40,7 +40,7 @@ func TestDo(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			c := Reporter{
-				Client: mockClient{generateFunc: tc.generateFunc},
+				Client: mockClient{res: tc.res, err: tc.err},
 			}
 			err := c.Do()
 			assert.Equal(t, tc.expectedErr, err)
