@@ -15,10 +15,12 @@ type httpHandler struct {
 }
 
 func New(generator generator) httpHandler {
-	return httpHandler{parentheses: generator}
+	handler := httpHandler{parentheses: generator}
+	handler.setRoutes()
+	return handler
 }
 
-func (h httpHandler) SetRoutes() {
+func (h httpHandler) setRoutes() {
 	http.HandleFunc("/generate", h.generateHandler)
 }
 
