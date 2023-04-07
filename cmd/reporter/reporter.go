@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	requester := client.NewClient("http://localhost:8080")
+	requester := client.New("http://localhost:8080")
 	reporter := reporter.Reporter{Client: requester}
 	if err := reporter.Do(); err != nil {
 		log.Fatal(err)

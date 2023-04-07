@@ -11,7 +11,7 @@ type Client struct {
 	URI string
 }
 
-func NewClient(serverURI string) Client {
+func New(serverURI string) Client {
 	return Client{URI: serverURI}
 }
 

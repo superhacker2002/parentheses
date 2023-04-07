@@ -17,7 +17,7 @@ func TestGenerate(t *testing.T) {
 	}))
 	defer server.Close()
 
-	c := NewClient(server.URL)
+	c := New(server.URL)
 	result, err := c.Generate(10)
 
 	assert.NoError(t, err)
