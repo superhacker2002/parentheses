@@ -54,10 +54,11 @@ func TestIsBalanced(t *testing.T) {
 			expected: true,
 		},
 	}
+	p := New()
 
 	for _, testCase := range testCases {
 		t.Run(testCase.name, func(t *testing.T) {
-			isBalanced := IsBalanced(testCase.input)
+			isBalanced := p.IsBalanced(testCase.input)
 			assert.Equal(t, testCase.expected, isBalanced, "IsBalanced(%q) ", testCase.input)
 		})
 	}
@@ -67,9 +68,10 @@ func TestGenerateRandomSequence(t *testing.T) {
 	seed := time.Now().UnixNano()
 	t.Logf("random seed is %d", seed)
 	rand.Seed(seed)
+	p := New()
 
 	length := uint(rand.Intn(100))
-	result := GenerateRandom(length)
+	result := p.GenerateRandom(length)
 	assert.Equal(t, length, uint(len(result)))
 	const parentheses = "({[]})"
 	for _, c := range result {
