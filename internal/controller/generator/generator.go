@@ -11,11 +11,11 @@ type parenthesesGenerator interface {
 }
 
 type generator struct {
-	generator parenthesesGenerator
+	parentheses parenthesesGenerator
 }
 
 func New(gen parenthesesGenerator) generator {
-	return generator{generator: gen}
+	return generator{parentheses: gen}
 }
 
 func (g generator) SetRoutes() {
@@ -33,5 +33,5 @@ func (g generator) generateHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "length must be greater than 0", http.StatusBadRequest)
 		return
 	}
-	fmt.Fprintln(w, g.generator.GenerateRandom(uint(length)))
+	fmt.Fprintln(w, g.parentheses.GenerateRandom(uint(length)))
 }
