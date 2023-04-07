@@ -2,16 +2,27 @@ package generator
 
 import (
 	"fmt"
-	"github.com/superhacker2002/parentheses/internal/parentheses"
 	"net/http"
 	"strconv"
 )
 
-func SetRoutes() {
-	http.HandleFunc("/generate", generateHandler)
+type parenthesesGenerator interface {
+	GenerateRandom(uint) string
 }
 
-func generateHandler(w http.ResponseWriter, r *http.Request) {
+type generator struct {
+	generator parenthesesGenerator
+}
+
+func New(gen parenthesesGenerator) generator {
+	return generator{generator: gen}
+}
+
+func (g generator) SetRoutes() {
+	http.HandleFunc("/generate", g.generateHandler)
+}
+
+func (g generator) generateHandler(w http.ResponseWriter, r *http.Request) {
 	lengthParameter := r.URL.Query().Get("n")
 	length, err := strconv.Atoi(lengthParameter)
 	if err != nil {
@@ -22,5 +33,5 @@ func generateHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "length must be greater than 0", http.StatusBadRequest)
 		return
 	}
-	fmt.Fprintln(w, parentheses.GenerateRandom(uint(length)))
+	fmt.Fprintln(w, g.generator.GenerateRandom(uint(length)))
 }

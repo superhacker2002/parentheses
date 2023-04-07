@@ -2,6 +2,7 @@ package reporter
 
 import (
 	"errors"
+	"github.com/superhacker2002/parentheses/internal/parentheses"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -36,10 +37,9 @@ func TestDo(t *testing.T) {
 			expectedErr: errors.New("error generating string"),
 		},
 	}
-
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			c := New(mockClient{res: tc.res, err: tc.err})
+			c := New(parentheses.New(), mockClient{res: tc.res, err: tc.err})
 			err := c.Do()
 			assert.Equal(t, tc.expectedErr, err)
 		})

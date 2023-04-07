@@ -2,19 +2,23 @@ package reporter
 
 import (
 	"fmt"
-	"github.com/superhacker2002/parentheses/internal/parentheses"
 )
 
 type client interface {
 	Generate(length uint) (string, error)
 }
 
-type reporter struct {
-	client client
+type parenthesesChecker interface {
+	IsBalanced(str string) bool
 }
 
-func New(client client) reporter {
-	return reporter{client: client}
+type reporter struct {
+	parentheses parenthesesChecker
+	client      client
+}
+
+func New(p parenthesesChecker, client client) reporter {
+	return reporter{parentheses: p, client: client}
 }
 
 func (r reporter) Do() error {
@@ -34,7 +38,7 @@ func (r reporter) report(length uint) error {
 		if err != nil {
 			return err
 		}
-		if parentheses.IsBalanced(resp) {
+		if r.parentheses.IsBalanced(resp) {
 			balancedNum++
 		}
 	}
