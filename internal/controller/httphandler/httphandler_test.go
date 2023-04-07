@@ -54,13 +54,12 @@ func TestGenerateHandler(t *testing.T) {
 		},
 	}
 	rand.Seed(1)
-
+	handler := New(parentheses.New())
 	for _, testCase := range testCases {
 		t.Run(testCase.name, func(t *testing.T) {
 			request, _ := http.NewRequest(http.MethodGet, testCase.url, nil)
 			response := httptest.NewRecorder()
-			g := New(parentheses.New())
-			g.generateHandler(response, request)
+			handler.generateHandler(response, request)
 			assert.Equal(t, testCase.status, response.Code, "generateHandler returned wrong status code")
 			assert.Equal(t, testCase.expected, response.Body.String())
 		})

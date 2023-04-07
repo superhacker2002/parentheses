@@ -10,8 +10,7 @@ import (
 )
 
 func main() {
-	handler := httphandler.New(parentheses.New())
-	handler.SetRoutes()
+	httphandler.New(parentheses.New())
 	rand.Seed(time.Now().UnixNano())
 	log.Fatal(http.ListenAndServe("localhost:8080", nil))
 }
