@@ -20,7 +20,7 @@ func main() {
 	if !exists {
 		log.Fatal("no server address provided in .env file")
 	}
-	client := client.New("http://" + serverAddr)
+	client := client.New(serverAddr)
 	reporter := reporter.New(parentheses.New(), client)
 	if err := reporter.Do(); err != nil {
 		log.Fatal(err)
