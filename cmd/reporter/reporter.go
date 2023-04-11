@@ -16,11 +16,11 @@ func init() {
 }
 
 func main() {
-	serverAddr, exists := os.LookupEnv("SERVER_ADDR")
+	serverURL, exists := os.LookupEnv("SERVER_URL")
 	if !exists {
 		log.Fatal("no server address provided in .env file")
 	}
-	client := client.New(serverAddr)
+	client := client.New(serverURL)
 	reporter := reporter.New(parentheses.New(), client)
 	if err := reporter.Do(); err != nil {
 		log.Fatal(err)
