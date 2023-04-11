@@ -35,7 +35,6 @@ func (r reporter) Do() error {
 }
 
 func (r reporter) report(length uint) error {
-	fmt.Println(length)
 	var balancedNum int
 	for i := 0; i < 1000; i++ {
 		resp, err := r.client.Generate(length)
