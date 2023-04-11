@@ -18,12 +18,12 @@ func init() {
 }
 
 func main() {
-	serverAddr, exists := os.LookupEnv("SERVER_ADDR")
+	serverPort, exists := os.LookupEnv("SERVER_PORT")
 	if !exists {
-		log.Fatal("no server address provided in .env file")
+		log.Fatal("no server port provided in .env file")
 	}
 
 	httphandler.New(parentheses.New())
 	rand.Seed(time.Now().UnixNano())
-	log.Fatal(http.ListenAndServe(serverAddr, nil))
+	log.Fatal(http.ListenAndServe("localhost:"+serverPort, nil))
 }
