@@ -2,12 +2,17 @@
 Project that contains web service for generating string with random parentheses of the given length and client for reporting percentage of balanced and unbalanced generated strings.
 
 ## Usage
-**1.** Download repository from GitHub   
-**2.** Run web service:
+**1.** Download repository from GitHub  
+**2.** Set up environment variables:
+- Create .env file
+- Set `PORT` variable to port on which the server will listen for incoming connections.  
+- Set `SERVER_URL` to the URL or address where the web server is located.  
+
+**3.** Run web service:
 ```go
 go run cmd/generator/generator.go
 ```
-**3.** Run client and get a report:
+**4.** Run client and get a report:
 ```go
 go run cmd/reporter/reporter.go
 ```

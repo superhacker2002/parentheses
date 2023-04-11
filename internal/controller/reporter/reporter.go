@@ -26,6 +26,7 @@ func (r reporter) Do() error {
 	lengths := [3]uint{2, 4, 8}
 	g := new(errgroup.Group)
 	for _, length := range lengths {
+		length := length
 		g.Go(func() error {
 			return r.report(length)
 		})
